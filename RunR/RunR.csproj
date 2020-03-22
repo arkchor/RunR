@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Archersoft.RunR</RootNamespace>
+    <Version>0.9.0</Version>
+    <Authors>Arkadiusz Chorian</Authors>
+    <Company>Archersoft</Company>
+    <Description>RunR is micro-framework that provides easy way to implement async commands and present its execution on GUI. Within your commands implementation simply do logging and report percentage progress to show state of execution on GUI.</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.0" />
+  </ItemGroup>
+
+</Project>
