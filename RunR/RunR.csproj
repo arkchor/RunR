@@ -10,6 +10,10 @@
     <Description>RunR is micro-framework that provides easy way to implement async commands and present its execution on GUI. Within your commands implementation simply do logging and report percentage progress to show state of execution on GUI.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/ArkadiuszChorian/RunR</RepositoryUrl>
+    <RepositoryType />
+    <PackageTags />
+    <PackageProjectUrl>https://github.com/ArkadiuszChorian/RunR</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
