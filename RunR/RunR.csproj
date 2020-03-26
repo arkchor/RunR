@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <RootNamespace>Archersoft.RunR</RootNamespace>
-    <Version>0.9.1</Version>
+    <Version>0.9.2</Version>
     <Authors>Arkadiusz Chorian</Authors>
     <Company>Archersoft</Company>
     <Description>RunR is micro-framework that provides easy way to implement async commands and present its execution on GUI. Within your commands implementation simply do logging and report percentage progress to show state of execution on GUI.</Description>

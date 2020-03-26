@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -47,6 +48,43 @@ namespace Archersoft.RunR
             return this;
         }
 
+        public RunRBuilder AddCommandsChain<TCommand1, TCommand2>(string uniqueName, string displayName, string description)
+            where TCommand1 : class, ICommand
+            where TCommand2 : class, ICommand
+        {
+            var commandDefinition = new CommandDefinition(
+                uniqueName,
+                displayName,
+                description,
+                serviceProvider => CreateCommandsChain(serviceProvider, typeof(TCommand1), typeof(TCommand2)));
+
+            _serviceCollection.AddSingleton(commandDefinition);
+            _serviceCollection.AddTransient<TCommand1>();
+            _serviceCollection.AddTransient<TCommand2>();
+
+            return this;
+        }
+
+        public RunRBuilder AddCommandsChain<TCommand1, TCommand2, TCommand3>(string uniqueName, string displayName, string description)
+            where TCommand1 : class, ICommand
+            where TCommand2 : class, ICommand
+            where TCommand3 : class, ICommand
+        {
+            var commandDefinition = new CommandDefinition(
+                uniqueName,
+                displayName,
+                description,
+                serviceProvider
+                    => CreateCommandsChain(serviceProvider, typeof(TCommand1), typeof(TCommand2), typeof(TCommand3)));
+
+            _serviceCollection.AddSingleton(commandDefinition);
+            _serviceCollection.AddTransient<TCommand1>();
+            _serviceCollection.AddTransient<TCommand2>();
+            _serviceCollection.AddTransient<TCommand3>();
+
+            return this;
+        }
+
         public RunRBuilder AddCustomServices(Action<IServiceCollection> setupAction)
         {
             setupAction(_serviceCollection);
@@ -73,6 +111,16 @@ namespace Archersoft.RunR
                 .GetService<IEnumerable<CommandDefinition>>();
 
             _runRControl.SetDependencies(serviceScopeFactory, commandDefinitions, _onUnhandledExceptionAction);
+        }
+
+        private static ICommand CreateCommandsChain(IServiceProvider serviceProvider, params Type[] commandTypes)
+        {
+            var commandsChain = commandTypes
+                .Select(serviceProvider.GetService)
+                .Cast<ICommand>()
+                .ToArray();
+
+            return new CommandChain(commandsChain);
         }
     }
 }
